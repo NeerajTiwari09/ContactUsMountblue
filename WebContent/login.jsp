@@ -7,10 +7,10 @@
 <title>Login</title>
 </head>
 <body>
-
+	
 	<form action= "login" method="post">
-		Email: <br><input type= "email" name="email"><br>
-		Password: <br><input type= "password" name="password"><br>
+		Email: <br><input type= "email" name="email"><br>abc@example.com<br><br>
+		Password: <br><input type= "password" name="password"><br>mountblue<br><br>
 		<input type= "submit" value="Login"> 
 	</form>
 
