@@ -14,6 +14,15 @@ import com.example.model.Request;
 @WebServlet("/contactus")
 public class ContactUsServlet extends HttpServlet {
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			response.sendRedirect("contactUs.jsp");
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		
 		try {

@@ -18,6 +18,15 @@ import com.example.model.Request;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			response.sendRedirect("login.jsp");
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -25,11 +34,12 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password").toString();
 		try {
 			LoginDao loginDao = new LoginDao();
+			
 			if(loginDao.check(email, password)) {
 				RequestDao requestDao = new RequestDao();
 				HttpSession session = request.getSession();
-				session.setAttribute("email", request.getParameter("email"));
-				session.setAttribute("password", request.getParameter("password"));
+				session.setAttribute("email", email);
+				session.setAttribute("password", password);
 				List<Request> requests = requestDao.getRequests();
 				request.setAttribute("requests", requests);
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("request.jsp");

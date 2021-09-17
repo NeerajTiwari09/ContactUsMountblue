@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,5 +34,25 @@ public class RequestDao {
 			e.printStackTrace();
 		}
 		return requests;
+	}
+	
+	public Request setActiveOrArchived(Request request) {
+		Connection connection = Dao.getConnectionInstance();
+		try {
+			boolean status = request.isActive();
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ?");
+			preparedStatement.setBoolean(1, !(status));
+			int flag = preparedStatement.executeUpdate();
+		
+			if(flag == 1){
+				request.setActive(!(status));
+				return request;
+			}
+		} 
+		catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return request;
 	}
 }

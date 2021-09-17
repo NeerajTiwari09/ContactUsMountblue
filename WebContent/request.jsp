@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.sql.*, com.example.model.*, java.util.*" %>
+    <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,12 +21,13 @@
 		if(session.getAttribute("email") == null || session.getAttribute("password") == null){
 			response.sendRedirect("login.jsp");
 		}
-		else{
-			List<Request> requests = (List<Request>)request.getAttribute("requests");
-		}
 	%>
 	
-	${requests}
+	<c:forEach items="${requests}" var = "req">
+		${req} <form action="active" method="post">
+		<input type="hidden" name="myObject" value="${req}" />
+		<input type="submit" name="Archived"></form><br>
+	</c:forEach>
 	
 
 </body>
