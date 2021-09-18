@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
-
 import com.example.dao.RequestDao;
 import com.example.model.ContactRequest;
 
@@ -40,8 +37,7 @@ public class RequestServlet extends HttpServlet {
 			}
 			else {
 				response.getWriter().print("Something error...");
-			}
-			
+			}	
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
