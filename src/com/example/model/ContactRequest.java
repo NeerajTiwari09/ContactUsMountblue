@@ -3,6 +3,7 @@ package com.example.model;
 import java.sql.Timestamp;
 
 public class ContactRequest {
+	private Integer requestId;
 	private String name;
 	private String email;
 	private String message;
@@ -10,7 +11,12 @@ public class ContactRequest {
 	private boolean active;
 	
 	
-	
+	public Integer getRequestId() {
+		return requestId;
+	}
+	public void setRequestId(Integer requestId) {
+		this.requestId = requestId;
+	}
 	public String getName() {
 		return name;
 	}
@@ -41,11 +47,5 @@ public class ContactRequest {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	@Override
-	public String toString() {
-		return "Request [name=" + name + ", email=" + email + ", message=" + message + "]";
-	}
-	
 	
 }

@@ -27,6 +27,7 @@ public class RequestDao {
 				contactRequest.setMessage(resultSet.getString(3));
 				contactRequest.setTimeStamp(resultSet.getTimestamp(4));
 				contactRequest.setActive(resultSet.getBoolean(5));
+				contactRequest.setRequestId(resultSet.getInt(6));
 				contactRequests.add(contactRequest);
 			}
 		}
@@ -36,23 +37,23 @@ public class RequestDao {
 		return contactRequests;
 	}
 	
-	public ContactRequest setActiveOrArchived(ContactRequest contactRequest) {
+	public boolean setActiveOrArchived(ContactRequest contactRequest) {
 		Connection connection = Dao.getConnectionInstance();
 		try {
 			boolean status = contactRequest.isActive();
-			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ? where requestId = ?");
 			preparedStatement.setBoolean(1, !(status));
+			preparedStatement.setInt(2, contactRequest.getRequestId());
 			int flag = preparedStatement.executeUpdate();
 		
 			if(flag == 1){
-				contactRequest.setActive(!(status));
-				return contactRequest;
+				return true;
 			}
 		} 
 		catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-		return contactRequest;
+		return false;
 	}
 }

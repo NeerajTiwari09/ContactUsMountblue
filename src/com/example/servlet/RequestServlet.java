@@ -1,18 +1,19 @@
 package com.example.servlet;
 
 import java.io.IOException;
-import java.io.Reader;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 import com.example.dao.RequestDao;
+import com.example.model.ContactRequest;
 
 
 
@@ -24,21 +25,25 @@ public class RequestServlet extends HttpServlet {
 		try {
 			
 			RequestDao requestDao = new RequestDao();
-			String string = request.getParameter("req");
+			ContactRequest contactRequest = new ContactRequest();
+			String status = request.getParameter("reqStatus");
+			int requestId = Integer.valueOf(request.getParameter("reqId"));
+	
+			contactRequest.setActive(Boolean.valueOf(status));
+			contactRequest.setRequestId(requestId);
 			
-	        
-			JSONObject object =  (JSONObject) new JSONParser().parse(string);
-			
-
-//			Request req = new Request();
-//			req.setEmail((String) object.get("name"));
-			
-//			Request req = requestDao.setActiveOrArchived(obj);
-			
-			response.getWriter().println(string + "  " /*+ (String) object.get("name")*/);
+			if(requestDao.setActiveOrArchived(contactRequest)) {
+				List<ContactRequest> contactRequests = requestDao.getRequests();
+				HttpSession session = request.getSession();
+				session.setAttribute("requests", contactRequests);
+				response.sendRedirect("request.jsp");
+			}
+			else {
+				response.getWriter().print("Something error...");
+			}
 			
 		} 
-		catch (IOException | ParseException e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

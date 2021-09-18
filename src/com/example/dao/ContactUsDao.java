@@ -11,7 +11,7 @@ public class ContactUsDao {
 	public boolean setContactUs(ContactRequest contactRequest) {
 		try {
 			Connection con = Dao.getConnectionInstance();
-			PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO requests values(?,?,?,?,?)");
+			PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO requests(email, fullname, message, dateEntered, status) values(?,?,?,?,?)");
 			preparedStatement.setString(1, contactRequest.getEmail());
 			preparedStatement.setString(2, contactRequest.getName());
 			preparedStatement.setString(3, contactRequest.getMessage());

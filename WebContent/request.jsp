@@ -60,31 +60,50 @@ tr:nth-child(even) {
 			response.sendRedirect("login.jsp");
 		}
 	%>
+	
+	<%! 
+		int i = 1;
+		int j = 1;
+	%>
+	
 	<div class="row">
 		<div class="column">
 			<table>
 				<th>Active</th>
 				<c:forEach items="${requests}" var = "req">
-				<c:if test = "${req.active}">
-				<tr><td>${req.name}<br>${req.email}<br>${req.message}<form action="active" method="post">
-				<input type="hidden" name="req" value="${req}"/><input type="submit" value= "Mark as archive"></form><br>
-				</td></tr>
-				</c:if>
+					<c:if test = "${req.active}">
+						<tr>
+							<td>${req.name}<br>${req.email}<br>${req.message}
+								<form action="active" method="post">
+								<input type="hidden" name="reqStatus" value="${req.active}"/>
+								<input type="hidden" name="reqId" value="${req.requestId}"/>
+								<input type="submit" value= "Mark as archive">
+							</form><br>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</table>
 		</div>
 	
 		<div class="column">
 			<table>
-			<th>Archived</th>
-			<c:forEach items="${requests}" var = "req">
-			<c:if test = "${req.active == false}">
-				<tr><td>${req.name}<br>${req.email}<br>${req.message}<form action="active" method="post">
-				<input type="hidden" name="req" value="${req}"/><input type="submit" value= "Mark as active"></form><br></td></tr>
-			</c:if>
-			</c:forEach>
-		</table>
-	</div>
+				<th>Archived</th>
+				<c:forEach items="${requests}" var = "req">
+					<c:if test = "${req.active == false}">
+						<tr>
+							<td>${req.name}<br>${req.email}<br>${req.message}
+								<form action="active" method="post">
+									<input type="hidden" name="reqStatus" value="${req.active}"/>
+									<input type="hidden" name="reqId" value="${req.requestId}"/>
+									<input type="submit" value= "Mark as active">
+								</form><br>
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 
 </body>

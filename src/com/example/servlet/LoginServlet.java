@@ -30,7 +30,6 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 	
-	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
 		String email = request.getParameter("email").toString();
@@ -44,9 +43,6 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
 				List<ContactRequest> contactRequests = requestDao.getRequests();
-//				RequestDispatcher requestDispatcher = request.getRequestDispatcher("request.jsp");
-//				requestDispatcher.forward(request, response);
-//				HttpSession session2 = request.getSession();
 				session.setAttribute("requests", contactRequests);
 				response.sendRedirect("request.jsp");
 			}
