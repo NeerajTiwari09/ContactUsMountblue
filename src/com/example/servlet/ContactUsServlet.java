@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.dao.ContactUsDao;
-import com.example.model.Request;
+import com.example.model.ContactRequest;
 
 @WebServlet("/contactus")
 public class ContactUsServlet extends HttpServlet {
@@ -26,15 +26,15 @@ public class ContactUsServlet extends HttpServlet {
 	public void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		
 		try {
-			Request request = new Request();
-			request.setName(httpRequest.getParameter("fullname"));
-			request.setEmail(httpRequest.getParameter("email"));
-			request.setMessage(httpRequest.getParameter("message"));
-			request.setActive(true);
-			request.setTimeStamp(new Timestamp(System.currentTimeMillis()));
+			ContactRequest contactRequest = new ContactRequest();
+			contactRequest.setName(httpRequest.getParameter("fullname"));
+			contactRequest.setEmail(httpRequest.getParameter("email"));
+			contactRequest.setMessage(httpRequest.getParameter("message"));
+			contactRequest.setActive(true);
+			contactRequest.setTimeStamp(new Timestamp(System.currentTimeMillis()));
 			
 			ContactUsDao contactUsDao = new ContactUsDao();
-			if(contactUsDao.setContactUs(request)) {
+			if(contactUsDao.setContactUs(contactRequest)) {
 				httpResponse.getWriter().print("Submitted");
 			}
 			

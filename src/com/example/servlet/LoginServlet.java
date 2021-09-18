@@ -6,14 +6,17 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.postgresql.shaded.com.ongres.scram.client.ScramSession;
+
 import com.example.dao.LoginDao;
 import com.example.dao.RequestDao;
-import com.example.model.Request;
+import com.example.model.ContactRequest;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -40,17 +43,18 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
-				List<Request> requests = requestDao.getRequests();
-				request.setAttribute("requests", requests);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("request.jsp");
-				requestDispatcher.forward(request, response);
-//				response.sendRedirect("request.jsp");
+				List<ContactRequest> contactRequests = requestDao.getRequests();
+//				RequestDispatcher requestDispatcher = request.getRequestDispatcher("request.jsp");
+//				requestDispatcher.forward(request, response);
+//				HttpSession session2 = request.getSession();
+				session.setAttribute("requests", contactRequests);
+				response.sendRedirect("request.jsp");
 			}
 			else {
 				response.sendRedirect("login.jsp");
 			}
 		}
-		catch(ServletException | IOException e) {
+		catch( IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -2,7 +2,7 @@ package com.example.model;
 
 import java.sql.Timestamp;
 
-public class Request {
+public class ContactRequest {
 	private String name;
 	private String email;
 	private String message;

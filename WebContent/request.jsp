@@ -55,7 +55,6 @@ tr:nth-child(even) {
 
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-		response.setHeader("Pragma", "no-cache");
 	
 		if(session.getAttribute("email") == null || session.getAttribute("password") == null){
 			response.sendRedirect("login.jsp");
@@ -66,8 +65,11 @@ tr:nth-child(even) {
 			<table>
 				<th>Active</th>
 				<c:forEach items="${requests}" var = "req">
+				<c:if test = "${req.active}">
 				<tr><td>${req.name}<br>${req.email}<br>${req.message}<form action="active" method="post">
-				<input type="hidden" name="myObject" value="${req}"/><input type="submit" value="Mark as archive"></form><br>
+				<input type="hidden" name="req" value="${req}"/><input type="submit" value= "Mark as archive"></form><br>
+				</td></tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		</div>
@@ -76,8 +78,10 @@ tr:nth-child(even) {
 			<table>
 			<th>Archived</th>
 			<c:forEach items="${requests}" var = "req">
+			<c:if test = "${req.active == false}">
 				<tr><td>${req.name}<br>${req.email}<br>${req.message}<form action="active" method="post">
-				<input type="hidden" name="myObject" value="${req}"/><input type="submit" value="Mark as active"></form><br>
+				<input type="hidden" name="req" value="${req}"/><input type="submit" value= "Mark as active"></form><br></td></tr>
+			</c:if>
 			</c:forEach>
 		</table>
 	</div>

@@ -4,19 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.example.connector.Dao;
-import com.example.model.Request;
+import com.example.model.ContactRequest;
 
 public class ContactUsDao {
 	
-	public boolean setContactUs(Request request) {
+	public boolean setContactUs(ContactRequest contactRequest) {
 		try {
 			Connection con = Dao.getConnectionInstance();
 			PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO requests values(?,?,?,?,?)");
-			preparedStatement.setString(1, request.getEmail());
-			preparedStatement.setString(2, request.getName());
-			preparedStatement.setString(3, request.getMessage());
-			preparedStatement.setTimestamp(4, request.getTimeStamp());
-			preparedStatement.setBoolean(5, request.isActive());
+			preparedStatement.setString(1, contactRequest.getEmail());
+			preparedStatement.setString(2, contactRequest.getName());
+			preparedStatement.setString(3, contactRequest.getMessage());
+			preparedStatement.setTimestamp(4, contactRequest.getTimeStamp());
+			preparedStatement.setBoolean(5, contactRequest.isActive());
 
 			int flag = preparedStatement.executeUpdate();
 			if(flag == 1) {

@@ -9,50 +9,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.connector.Dao;
-import com.example.model.Request;
+import com.example.model.ContactRequest;
 
 public class RequestDao {
 	
-	public List<Request> getRequests(){
-		List<Request> requests = new ArrayList<>();
+	public List<ContactRequest> getRequests(){
+		List<ContactRequest> contactRequests = new ArrayList<>();
 		
 		try{
 			Connection connection = Dao.getConnectionInstance();
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM requests ORDER BY dateEntered desc");
 			while(resultSet.next()){
-				Request request = new Request();
-				request.setEmail(resultSet.getString(1));
-				request.setName(resultSet.getString(2));
-				request.setMessage(resultSet.getString(3));
-				request.setTimeStamp(resultSet.getTimestamp(4));
-				request.setActive(resultSet.getBoolean(5));
-				requests.add(request);
+				ContactRequest contactRequest = new ContactRequest();
+				contactRequest.setEmail(resultSet.getString(1));
+				contactRequest.setName(resultSet.getString(2));
+				contactRequest.setMessage(resultSet.getString(3));
+				contactRequest.setTimeStamp(resultSet.getTimestamp(4));
+				contactRequest.setActive(resultSet.getBoolean(5));
+				contactRequests.add(contactRequest);
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return requests;
+		return contactRequests;
 	}
 	
-	public Request setActiveOrArchived(Request request) {
+	public ContactRequest setActiveOrArchived(ContactRequest contactRequest) {
 		Connection connection = Dao.getConnectionInstance();
 		try {
-			boolean status = request.isActive();
+			boolean status = contactRequest.isActive();
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ?");
 			preparedStatement.setBoolean(1, !(status));
 			int flag = preparedStatement.executeUpdate();
 		
 			if(flag == 1){
-				request.setActive(!(status));
-				return request;
+				contactRequest.setActive(!(status));
+				return contactRequest;
 			}
 		} 
 		catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-		return request;
+		return contactRequest;
 	}
 }

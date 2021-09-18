@@ -11,12 +11,18 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession();
-		session.removeAttribute("email");
-		session.removeAttribute("password");
-		session.invalidate();
-		response.sendRedirect("login.jsp");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			
+			HttpSession session = request.getSession();
+			session.removeAttribute("email");
+			session.removeAttribute("password");
+			session.invalidate();
+			response.sendRedirect("login.jsp");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
