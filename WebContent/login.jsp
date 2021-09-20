@@ -4,15 +4,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="style.css">
 <title>Login</title>
 </head>
 <body>
 	
-	<form action= "login" method="post">
-		Email: <br><input type= "email" name="email"><br>abc@example.com<br><br>
-		Password: <br><input type= "password" name="password"><br>mountblue<br><br>
-		<input type= "submit" value="Login"> 
-	</form>
+	<div class="center">
+      <h1>Login</h1>
+      <form action= "login" method="post">
+        <div class="txt_field">
+          <input type="text" name="email" required="required">
+          <span></span>
+          <label>Email</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" name="password" required="required">
+          <span></span>
+          <label>Password</label>
+        </div>
+        <input type="submit" value="Login">
+      </form>
+    </div>
 
 </body>
 </html>

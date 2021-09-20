@@ -5,17 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact Us</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	
+	<div class="box">
+	<h1>Contact Us</h1>
 	<form action= "contactus" method="post">
-		Name: <br><input type= "text" name="fullname"><br>
-		Email: <br><input type= "email" name="email"><br>
-		Message: 
-		<br><textarea name="message" rows="4" cols="50"></textarea><br>
-		<input type= "submit" value="Submit"> 
-		
+	 <div class="txt_field">
+          <input  type= "text" name= "fullname" required= "required">
+          <span></span>
+          <label>Name</label>
+        </div>
+        <div class="txt_field">
+          <input  type= "email" name= "email" required= "required">
+          <span></span>
+          <label>Email</label>
+        </div>
+         <div class="txt_field">
+          <textarea class= "textarea-field" name= "message" required ="required" rows="4" cols="50" placeholder="Type your message here...">
+          </textarea>
+        </div>
+		<input class="btn" type= "submit" value="Submit"> 	
 	</form>
+	</div>
 	
 </body>
 </html>

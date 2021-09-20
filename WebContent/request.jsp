@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.sql.*, com.example.model.*, java.util.*" %>
-    <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.sql.*, com.example.model.*, java.util.*" %>
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Requests</title>
+
 <style>
 * {
   box-sizing: border-box;
@@ -23,7 +25,6 @@
   padding: 5px;
 }
 
-/* Clearfix (clear floats) */
 .row::after {
   content: "";
   clear: both;
@@ -49,21 +50,15 @@ tr:nth-child(even) {
 </head>
 <body>
 
-	<form action="logout">
+	<form action="logout" method="get">
 		<input type="submit" value="Logout">
 	</form>
 
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	
 		if(session.getAttribute("email") == null || session.getAttribute("password") == null){
 			response.sendRedirect("login.jsp");
 		}
-	%>
-	
-	<%! 
-		int i = 1;
-		int j = 1;
 	%>
 	
 	<div class="row">
@@ -73,12 +68,15 @@ tr:nth-child(even) {
 				<c:forEach items="${requests}" var = "req">
 					<c:if test = "${req.active}">
 						<tr>
-							<td>${req.name}<br>${req.email}<br>${req.message}
+							<td>
+								${req.name}<br>
+								${req.email}<br>
+								${req.message}
 								<form action="active" method="post">
-								<input type="hidden" name="reqStatus" value="${req.active}"/>
-								<input type="hidden" name="reqId" value="${req.requestId}"/>
-								<input type="submit" value= "Mark as archive">
-							</form><br>
+									<input type="hidden" name="requestStatus" value="${req.active}"/>
+									<input type="hidden" name="requestId" value="${req.requestId}"/>
+									<input type="submit" value= "Mark as archive">
+								</form><br>
 							</td>
 						</tr>
 					</c:if>
@@ -92,10 +90,13 @@ tr:nth-child(even) {
 				<c:forEach items="${requests}" var = "req">
 					<c:if test = "${req.active == false}">
 						<tr>
-							<td>${req.name}<br>${req.email}<br>${req.message}
+							<td>
+								${req.name}<br>
+								${req.email}<br>
+								${req.message}
 								<form action="active" method="post">
-									<input type="hidden" name="reqStatus" value="${req.active}"/>
-									<input type="hidden" name="reqId" value="${req.requestId}"/>
+									<input type="hidden" name="requestStatus" value="${req.active}"/>
+									<input type="hidden" name="requestId" value="${req.requestId}"/>
 									<input type="submit" value= "Mark as active">
 								</form><br>
 							</td>

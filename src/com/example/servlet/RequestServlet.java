@@ -12,24 +12,20 @@ import javax.servlet.http.HttpSession;
 import com.example.dao.RequestDao;
 import com.example.model.ContactRequest;
 
-
-
-
 @WebServlet("/active")
 public class RequestServlet extends HttpServlet {
+	public static final String REQUEST_ID = "requestId";
+	public static final String REQUEST_STATUS = "requestStatus";
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			
 			RequestDao requestDao = new RequestDao();
 			ContactRequest contactRequest = new ContactRequest();
-			String status = request.getParameter("reqStatus");
-			int requestId = Integer.valueOf(request.getParameter("reqId"));
-	
+			String status = request.getParameter(REQUEST_STATUS);
+			int requestId = Integer.valueOf(request.getParameter(REQUEST_ID));
 			contactRequest.setActive(Boolean.valueOf(status));
 			contactRequest.setRequestId(requestId);
-			
-			if(requestDao.setActiveOrArchived(contactRequest)) {
+			if(requestDao.changeStatus(contactRequest)) {
 				List<ContactRequest> contactRequests = requestDao.getRequests();
 				HttpSession session = request.getSession();
 				session.setAttribute("requests", contactRequests);
@@ -43,6 +39,4 @@ public class RequestServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

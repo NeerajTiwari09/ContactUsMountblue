@@ -14,6 +14,10 @@ import com.example.model.ContactRequest;
 @WebServlet("/contactus")
 public class ContactUsServlet extends HttpServlet {
 	
+	public static final String FULLNAME = "fullname";
+	public static final String EMAIL = "email";
+	public static final String MESSAGE= "message";
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			response.sendRedirect("contactUs.jsp");
@@ -27,17 +31,16 @@ public class ContactUsServlet extends HttpServlet {
 		
 		try {
 			ContactRequest contactRequest = new ContactRequest();
-			contactRequest.setName(httpRequest.getParameter("fullname"));
-			contactRequest.setEmail(httpRequest.getParameter("email"));
-			contactRequest.setMessage(httpRequest.getParameter("message"));
+			contactRequest.setName(httpRequest.getParameter(FULLNAME));
+			contactRequest.setEmail(httpRequest.getParameter(EMAIL));
+			contactRequest.setMessage(httpRequest.getParameter(MESSAGE));
 			contactRequest.setActive(true);
 			contactRequest.setTimeStamp(new Timestamp(System.currentTimeMillis()));
 			
 			ContactUsDao contactUsDao = new ContactUsDao();
-			if(contactUsDao.setContactUs(contactRequest)) {
+			if(contactUsDao.insertContactUsData(contactRequest)) {
 				httpResponse.getWriter().print("Submitted");
-			}
-			
+			}	
 		}
 		catch (IOException e) {
 			e.printStackTrace();
