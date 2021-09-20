@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Dao {
+public class DaoConnector {
 	private static Connection connection;
 	
-	private Dao(){
+	private DaoConnector(){
 		
 	}
 	
@@ -15,12 +15,10 @@ public class Dao {
 		try {
 			if(connection == null) {
 				Class.forName("org.postgresql.Driver");
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/contactus", "root", "=");
-//				Class.forName("com.mysql.jdbc.Driver");
-//				String username = "root";
-//				String password = "root8080";
-//				String url = "jdbc:mysql://localhost:3306/contactus";
-//				connection = DriverManager.getConnection(url, username, password);
+				String username = "root";
+				String password = "=";
+				String url = "jdbc:postgresql://localhost:5432/contactus";
+				connection = DriverManager.getConnection(url, username, password);
 				return connection;
 			}
 		}

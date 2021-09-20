@@ -50,13 +50,12 @@ tr:nth-child(even) {
 </head>
 <body>
 
-	<form action="logout">
+	<form action="logout" method="get">
 		<input type="submit" value="Logout">
 	</form>
 
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	
 		if(session.getAttribute("email") == null || session.getAttribute("password") == null){
 			response.sendRedirect("login.jsp");
 		}
@@ -74,8 +73,8 @@ tr:nth-child(even) {
 								${req.email}<br>
 								${req.message}
 								<form action="active" method="post">
-									<input type="hidden" name="reqStatus" value="${req.active}"/>
-									<input type="hidden" name="reqId" value="${req.requestId}"/>
+									<input type="hidden" name="requestStatus" value="${req.active}"/>
+									<input type="hidden" name="requestId" value="${req.requestId}"/>
 									<input type="submit" value= "Mark as archive">
 								</form><br>
 							</td>
@@ -96,8 +95,8 @@ tr:nth-child(even) {
 								${req.email}<br>
 								${req.message}
 								<form action="active" method="post">
-									<input type="hidden" name="reqStatus" value="${req.active}"/>
-									<input type="hidden" name="reqId" value="${req.requestId}"/>
+									<input type="hidden" name="requestStatus" value="${req.active}"/>
+									<input type="hidden" name="requestId" value="${req.requestId}"/>
 									<input type="submit" value= "Mark as active">
 								</form><br>
 							</td>

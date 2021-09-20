@@ -13,30 +13,19 @@
 	<h1>Contact Us</h1>
 	<form action= "contactus" method="post">
 	 <div class="txt_field">
-        <!--   <input type="text" name="email" required> -->
-          <input  type= "text" name="fullname" required = "required">
+          <input  type= "text" name= "fullname" required= "required">
           <span></span>
           <label>Name</label>
         </div>
         <div class="txt_field">
-        <!--   <input type="text" name="email" required> -->
-          <input  type= "email" name="email" required = "required">
+          <input  type= "email" name= "email" required= "required">
           <span></span>
           <label>Email</label>
         </div>
          <div class="txt_field">
-        <!--   <input type="text" name="email" required> -->
-          <input class="textarea-field" name="message" required = "required" rows="4" cols="50">
-          <span></span>
-          <label>Type your message here...</label>
+          <textarea class= "textarea-field" name= "message" required ="required" rows="4" cols="50" placeholder="Type your message here...">
+          </textarea>
         </div>
-        
-		<!-- <label>Name: </label>
-		<input class="input-field" type= "text" name="fullname" required = "required">
-		<label>Email: </label>
-		<input class="input-field" type= "email" name="email" required><br>
-		<label>Message: </label><br>
-		<textarea class="textarea-field" name="message" rows="4" cols="50" required></textarea><br> -->
 		<input class="btn" type= "submit" value="Submit"> 	
 	</form>
 	</div>

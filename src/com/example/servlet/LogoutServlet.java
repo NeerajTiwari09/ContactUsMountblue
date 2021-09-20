@@ -8,13 +8,14 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
+	public static final String EMAIL = "email";
+	public static final String PASSWORD = "password";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			
 			HttpSession session = request.getSession();
-			session.removeAttribute("email");
-			session.removeAttribute("password");
+			session.removeAttribute(EMAIL);
+			session.removeAttribute(PASSWORD);
 			session.invalidate();
 			response.sendRedirect("login.jsp");
 		}

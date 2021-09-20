@@ -13,12 +13,12 @@
       <h1>Login</h1>
       <form action= "login" method="post">
         <div class="txt_field">
-          <input type="text" name="email" required>
+          <input type="text" name="email" required="required">
           <span></span>
           <label>Email</label>
         </div>
         <div class="txt_field">
-          <input type="password" name="password" required>
+          <input type="password" name="password" required="required">
           <span></span>
           <label>Password</label>
         </div>
