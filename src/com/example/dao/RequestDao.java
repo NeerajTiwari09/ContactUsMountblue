@@ -19,7 +19,7 @@ public class RequestDao {
 		try{
 			Connection connection = Dao.getConnectionInstance();
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM requests ORDER BY dateEntered desc");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM requests ORDER BY timestamp desc");
 			while(resultSet.next()){
 				ContactRequest contactRequest = new ContactRequest();
 				contactRequest.setEmail(resultSet.getString(1));
@@ -41,7 +41,7 @@ public class RequestDao {
 		Connection connection = Dao.getConnectionInstance();
 		try {
 			boolean status = contactRequest.isActive();
-			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ? where requestId = ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE requests SET status = ? where \"requestId\" = ?");
 			preparedStatement.setBoolean(1, !(status));
 			preparedStatement.setInt(2, contactRequest.getRequestId());
 			int flag = preparedStatement.executeUpdate();

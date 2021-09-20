@@ -5,17 +5,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contact Us</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	
+	<div class="box">
+	<h1>Contact Us</h1>
 	<form action= "contactus" method="post">
-		Name: <br><input type= "text" name="fullname"><br>
-		Email: <br><input type= "email" name="email"><br>
-		Message: 
-		<br><textarea name="message" rows="4" cols="50"></textarea><br>
-		<input type= "submit" value="Submit"> 
-		
+	 <div class="txt_field">
+        <!--   <input type="text" name="email" required> -->
+          <input  type= "text" name="fullname" required = "required">
+          <span></span>
+          <label>Name</label>
+        </div>
+        <div class="txt_field">
+        <!--   <input type="text" name="email" required> -->
+          <input  type= "email" name="email" required = "required">
+          <span></span>
+          <label>Email</label>
+        </div>
+         <div class="txt_field">
+        <!--   <input type="text" name="email" required> -->
+          <input class="textarea-field" name="message" required = "required" rows="4" cols="50">
+          <span></span>
+          <label>Type your message here...</label>
+        </div>
+        
+		<!-- <label>Name: </label>
+		<input class="input-field" type= "text" name="fullname" required = "required">
+		<label>Email: </label>
+		<input class="input-field" type= "email" name="email" required><br>
+		<label>Message: </label><br>
+		<textarea class="textarea-field" name="message" rows="4" cols="50" required></textarea><br> -->
+		<input class="btn" type= "submit" value="Submit"> 	
 	</form>
+	</div>
 	
 </body>
 </html>

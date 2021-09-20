@@ -20,7 +20,6 @@ public class RequestServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			
 			RequestDao requestDao = new RequestDao();
 			ContactRequest contactRequest = new ContactRequest();
 			String status = request.getParameter("reqStatus");
